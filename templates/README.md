@@ -4,11 +4,11 @@
 
 | Fichier | Vibe / cas d'usage |
 |---|---|
-| `template-luxe-dore.html` | **Luxe Doré** — sombre, premium, doré. Artisanat haut de gamme, joaillerie, conciergerie, gastronomie. |
 | `template-minimal-epure.html` | **Minimal Épuré** — clair, aéré, éditorial. Studio de conseil, architecture, indépendant. |
 | `template-corporate-bleu.html` | **Corporate Bleu** — professionnel B2B, cartes arrondies, mock dashboard. Conseil, finance, tech. |
 | `template-creatif-audacieux.html` | **Créatif Audacieux** — bold, coloré, dégradés et blobs flous. Agence créative, branding, startup. |
-| `template-nature-bienetre.html` | **Nature Bien-être** — chaleureux, organique, arrondis généreux. Spa, yoga, bien-être, marque éco-responsable. |
+| `template-tech-sombre.html` | **Néo-Tech Sombre** — dark mode, coins nets, accent cyan unique, mock terminal. Startup tech, SaaS, studio produit, agence dev. |
+| `template-editorial-chaleureux.html` | **Éditorial Chaleureux** — ivoire chaud, typographie XXL et italiques, esprit couverture de magazine. Mode, lifestyle, média, marque personnelle. |
 
 Chaque fichier est un site d'une page complet : nav avec menu burger mobile, hero, bandeau de chiffres clés, section services, méthode en 3 étapes (`#methode`), galerie de réalisations (`#galerie`), bandeau d'engagement, témoignages, contact avec formulaire mailto (`#contact`), footer et bouton flottant de contact rapide.
 
