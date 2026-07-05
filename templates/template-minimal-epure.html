@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nom de votre marque] — [Votre activité] à [Votre ville]</title>
+<meta name="description" content="[Nom de votre marque], [courte description de votre activité] à [Votre ville].">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #FAF9F6;
+  --ink: #111111;
+  --line: rgba(0,0,0,0.12);
+  --muted: rgba(17,17,17,0.55);
+  --accent: #111111;
+  --accent-soft: #B85C38;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 3rem;
+  background: rgba(250,249,246,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.burger {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.burger:hover { background: var(--accent-soft); }
+.burger span {
+  display: block;
+  width: 18px; height: 1.5px;
+  background: var(--bg);
+  transition: all 0.3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  padding-top: 5rem;
+}
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--accent-soft); }
+
+.mobile-menu hr {
+  width: 2rem;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+.mobile-menu .mobile-social {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-btn {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.nav-btn:hover { opacity: 0.75; }
+
+/* ── HERO (centré, éditorial) ── */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 1.8rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--ink);
+  max-width: 900px;
+  margin-bottom: 1.8rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--accent-soft);
+  position: relative;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 540px;
+  margin-bottom: 2.2rem;
+}
+
+.hero-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.stars { color: var(--accent-soft); font-size: 1rem; letter-spacing: 0.1em; }
+.stars-text { font-size: 0.8rem; color: var(--muted); }
+.stars-text strong { color: var(--ink); font-weight: 600; }
+
+.hero-actions { display: flex; gap: 1.6rem; flex-wrap: wrap; align-items: center; justify-content: center; }
+
+.btn-fill {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 1rem 2.4rem;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+.btn-fill:hover { opacity: 0.75; }
+
+.btn-link {
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--accent-soft);
+  transition: color 0.3s;
+}
+.btn-link:hover { color: var(--accent-soft); }
+
+/* Feature chips row (below hero) */
+.chips-row {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 4rem;
+}
+.chips-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.chip {
+  padding: 2rem 2rem;
+  text-align: center;
+  border-left: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.3s;
+}
+.chip:first-child { border-left: none; }
+.chip:hover { background: rgba(0,0,0,0.02); }
+.chip-icon { font-size: 1.2rem; margin-bottom: 0.6rem; display: block; color: var(--accent-soft); }
+.chip-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+.chip-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+/* ── STATS (3 col, hairlines) ── */
+.numbers-band { background: var(--bg); padding: 4rem 2.5rem; }
+.numbers-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+.num-item { padding: 0 2rem; border-left: 1px solid var(--line); }
+.num-item:first-child { border-left: none; }
+.num-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+.num-value { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 500; color: var(--ink); line-height: 1; }
+.num-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; }
+
+/* ── SECTIONS ── */
+.section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.section-full { padding: 6rem 2.5rem; }
+
+.label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+.section-title em { font-style: italic; color: var(--accent-soft); }
+
+.section-desc {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 560px;
+  margin-bottom: 3.5rem;
+}
+
+/* ── SERVICES ── */
+.services-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.service-item { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 2.4rem 2rem; }
+.service-num { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--accent-soft); margin-bottom: 1rem; }
+.service-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 0.7rem; }
+.service-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); }
+
+/* ── MÉTHODE ── */
+.methode-bg { background: #F1EEE7; padding: 6rem 2.5rem; }
+.methode-inner { max-width: 1100px; margin: 0 auto; }
+.methode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+.methode-card { text-align: left; }
+.methode-icon { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--accent-soft); margin-bottom: 1rem; display: block; font-style: italic; }
+.methode-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 0.7rem; }
+.methode-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
+
+/* ── GALERIE (liste texte, pas de blocs colorés) ── */
+.galerie-bg { background: var(--bg); padding: 6rem 2.5rem; }
+.galerie-inner { max-width: 1100px; margin: 0 auto; }
+.galerie-list { margin-top: 3rem; border-top: 1px solid var(--line); }
+.galerie-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.25s;
+}
+.galerie-item:hover { background: rgba(0,0,0,0.02); }
+.galerie-item:hover .galerie-cap { text-decoration: underline; text-decoration-color: var(--accent-soft); text-underline-offset: 4px; }
+.galerie-num { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--muted); }
+.galerie-cap { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.galerie-arrow { font-size: 1rem; color: var(--accent-soft); transition: transform 0.25s; }
+.galerie-item:hover .galerie-arrow { transform: translateX(4px); }
+
+/* ── ENGAGEMENT ── */
+.engage-band { background: var(--ink); padding: 5rem 2.5rem; }
+.engage-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.engage-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 500; color: var(--bg); line-height: 1.2; }
+.engage-desc { font-size: 0.9rem; line-height: 1.8; color: rgba(250,249,246,0.65); margin-top: 1.1rem; }
+.engage-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(250,249,246,0.15); }
+.estat { background: var(--ink); padding: 1.6rem; }
+.estat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 500; color: var(--bg); line-height: 1; }
+.estat-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-soft); margin-top: 0.4rem; }
+.estat-desc { font-size: 0.78rem; color: rgba(250,249,246,0.55); margin-top: 0.5rem; line-height: 1.5; }
+
+/* ── TÉMOIGNAGES ── */
+.temoignages-bg { background: var(--bg); padding: 6rem 2.5rem; }
+.temoignages-inner { max-width: 1100px; margin: 0 auto; }
+.temo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+.temo-card { border-top: 1px solid var(--ink); padding-top: 1.6rem; }
+.temo-stars { color: var(--accent-soft); font-size: 0.85rem; margin-bottom: 1.2rem; }
+.temo-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; line-height: 1.6; color: var(--ink); margin-bottom: 1.5rem; }
+.temo-author { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
+.temo-context { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ── CONTACT ── */
+.contact-bg { background: #F1EEE7; padding: 6rem 2.5rem; }
+.contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-desc { font-size: 0.92rem; line-height: 1.8; color: var(--muted); margin-bottom: 2.5rem; }
+.contact-line { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+.contact-line:first-of-type { border-top: 1px solid var(--line); }
+.cl-icon { color: var(--accent-soft); font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.cl-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.cl-value { font-size: 0.92rem; color: var(--ink); }
+.cl-value a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent-soft); }
+
+.form-wrap { background: var(--bg); border: 1px solid var(--line); padding: 2.6rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+.form-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: block; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+  margin-bottom: 1.6rem;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(17,17,17,0.3); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--ink); }
+.form-textarea { resize: none; min-height: 100px; border: 1px solid var(--line); padding: 0.8rem; }
+.form-textarea:focus { border-color: var(--ink); }
+.form-submit {
+  background: var(--ink);
+  border: none;
+  color: var(--bg);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  border-radius: 999px;
+  width: 100%;
+}
+.form-submit:hover { opacity: 0.75; }
+.form-success { display: none; text-align: center; padding: 2rem 0; }
+.form-success.active { display: block; }
+.form-success-icon { font-size: 2rem; margin-bottom: 1rem; color: var(--accent-soft); }
+.form-success-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; margin-bottom: 0.6rem; }
+.form-success-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer { background: var(--bg); padding: 2.6rem 2.5rem; border-top: 1px solid var(--line); }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ink); }
+.footer-copy { font-size: 0.72rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--accent-soft); }
+
+/* ── FAB ── */
+.fab-btn {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 300;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+  font-size: 1.3rem;
+}
+.fab-btn:hover { transform: scale(1.08); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-btn { display: none; }
+  .burger { display: flex; }
+  .hero { padding: 6rem 1.5rem 3rem; }
+  .chips-inner { grid-template-columns: 1fr; }
+  .chip { border-left: none; border-top: 1px solid var(--line); }
+  .chip:first-child { border-top: none; }
+  .numbers-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .num-item { border-left: none; border-top: 1px solid var(--line); padding: 1.5rem 0 0; }
+  .num-item:first-child { border-top: none; padding-top: 0; }
+  .section { padding: 3.5rem 1.5rem; }
+  .section-full { padding: 3.5rem 1.5rem; }
+  .methode-bg, .galerie-bg, .engage-band, .temoignages-bg, .contact-bg { padding: 3.5rem 1.5rem; }
+  .services-list { grid-template-columns: 1fr; }
+  .methode-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .galerie-item { grid-template-columns: 40px 1fr auto; }
+  .engage-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .engage-stats { grid-template-columns: 1fr 1fr; }
+  .temo-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .numbers-band { padding: 2.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE : "Minimal Épuré" — ambiance claire, éditoriale, restreinte (studio de conseil, architecture, indépendant).
+  RECOLORATION : modifiez les variables CSS dans :root (--bg, --ink, --line, --muted, --accent, --accent-soft).
+  --accent-soft est la seule touche de couleur (mot accentué, soulignements, icônes) : gardez-la discrète.
+  À REMPLACER : tous les textes entre crochets, ex. [Nom de votre marque], [Votre ville], [votre-email@domaine.com], [+33 X XX XX XX XX],
+  [@votre-compte], ainsi que les liens tel:, mailto: et wa.me, et l'adresse email cible dans le script du formulaire de contact.
+  IDs d'ancrage conservés à l'identique sur les 5 templates : #methode, #galerie, #contact.
+-->
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">[Nom de votre marque]</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Prendre contact</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <hr>
+  <a href="#methode">Notre méthode</a>
+  <hr>
+  <a href="#galerie">Galerie</a>
+  <hr>
+  <a href="#contact">Contact</a>
+  <a href="https://instagram.com/[votre-compte]" target="_blank" class="mobile-social">@[votre-compte]</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('burgerBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    closeMenu();
+    setTimeout(() => {
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+});
+</script>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">[Secteur d'activité] · [Votre ville]</div>
+  <h1 class="hero-title">Une approche <em>sur mesure</em>, pensée pour durer.</h1>
+  <p class="hero-sub">[Votre promesse en une phrase]. Nous accompagnons [type de client] avec rigueur, clarté et une exigence de détail à chaque étape.</p>
+  <div class="hero-stars">
+    <div class="stars">★★★★★</div>
+    <div class="stars-text"><strong>5.0</strong> · Ils nous font confiance</div>
+  </div>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-fill">Prendre contact</a>
+    <a href="tel:+33600000000" class="btn-link">Appelez-nous →</a>
+  </div>
+</div>
+
+<div class="chips-row">
+  <div class="chips-inner">
+    <a href="#services" class="chip">
+      <span class="chip-icon">✦</span>
+      <div class="chip-name">[Service 1]</div>
+      <div class="chip-desc">[Courte description du service]</div>
+    </a>
+    <a href="#services" class="chip">
+      <span class="chip-icon">◆</span>
+      <div class="chip-name">[Service 2]</div>
+      <div class="chip-desc">[Courte description du service]</div>
+    </a>
+    <a href="#services" class="chip">
+      <span class="chip-icon">✧</span>
+      <div class="chip-name">[Service 3]</div>
+      <div class="chip-desc">[Courte description du service]</div>
+    </a>
+  </div>
+</div>
+
+<!-- CHIFFRES -->
+<div class="numbers-band">
+  <div class="numbers-inner">
+    <div class="num-item">
+      <div class="num-label">Réactivité</div>
+      <div class="num-value">24h</div>
+      <div class="num-desc">Première réponse personnalisée</div>
+    </div>
+    <div class="num-item">
+      <div class="num-label">Satisfaction</div>
+      <div class="num-value">98%</div>
+      <div class="num-desc">Clients qui nous recommandent</div>
+    </div>
+    <div class="num-item">
+      <div class="num-label">Projets</div>
+      <div class="num-value">80+</div>
+      <div class="num-desc">Menés à terme avec succès</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="label">Nos services</div>
+  <h2 class="section-title">Ce que nous <em>proposons.</em></h2>
+  <p class="section-desc">[Nom de votre marque] vous accompagne avec un ensemble de prestations pensées pour répondre précisément à vos besoins.</p>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-name">[Nom du service 1]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-name">[Nom du service 2]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-name">[Nom du service 3]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+    </div>
+  </div>
+</div>
+
+<!-- MÉTHODE -->
+<div class="methode-bg" id="methode">
+  <div class="methode-inner">
+    <div class="label">Notre méthode</div>
+    <h2 class="section-title">Une méthode <em>claire,</em><br>sans surprise.</h2>
+    <p class="section-desc">Faites confiance à un accompagnement capable de créer des résultats sur mesure, du premier échange à la livraison finale.</p>
+    <div class="methode-grid">
+      <div class="methode-card">
+        <span class="methode-icon">I.</span>
+        <div class="methode-title">Écoute</div>
+        <p class="methode-desc">On comprend votre contexte, vos objectifs, vos contraintes. Pas de solution générique.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">II.</span>
+        <div class="methode-title">Conception</div>
+        <p class="methode-desc">Analyse, recommandations, plan d'action : on construit une réponse précise et argumentée.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">III.</span>
+        <div class="methode-title">Livraison</div>
+        <p class="methode-desc">Mise en œuvre soignée, suivi rigoureux et accompagnement jusqu'au résultat final.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIE -->
+<div class="galerie-bg" id="galerie">
+  <div class="galerie-inner">
+    <div class="label">Nos réalisations</div>
+    <h2 class="section-title">Des projets menés<br>dans les <em>moindres détails.</em></h2>
+    <div class="galerie-list">
+      <a href="#" class="galerie-item">
+        <div class="galerie-num">01</div>
+        <div class="galerie-cap">[Projet 1 — nom du client]</div>
+        <div class="galerie-arrow">→</div>
+      </a>
+      <a href="#" class="galerie-item">
+        <div class="galerie-num">02</div>
+        <div class="galerie-cap">[Projet 2 — nom du client]</div>
+        <div class="galerie-arrow">→</div>
+      </a>
+      <a href="#" class="galerie-item">
+        <div class="galerie-num">03</div>
+        <div class="galerie-cap">[Projet 3 — nom du client]</div>
+        <div class="galerie-arrow">→</div>
+      </a>
+      <a href="#" class="galerie-item">
+        <div class="galerie-num">04</div>
+        <div class="galerie-cap">[Projet 4 — nom du client]</div>
+        <div class="galerie-arrow">→</div>
+      </a>
+      <a href="#" class="galerie-item">
+        <div class="galerie-num">05</div>
+        <div class="galerie-cap">[Projet 5 — nom du client]</div>
+        <div class="galerie-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ENGAGEMENT -->
+<div class="engage-band">
+  <div class="engage-inner">
+    <div>
+      <h2 class="engage-title">Votre partenaire de confiance,<br>nouvelle génération.</h2>
+      <p class="engage-desc">Une approche exigeante et transparente. Rigueur, exécution maîtrisée, réponse rapide. Un engagement de qualité à chaque étape.</p>
+    </div>
+    <div class="engage-stats">
+      <div class="estat">
+        <div class="estat-num">24h</div>
+        <div class="estat-label">Réactivité</div>
+        <div class="estat-desc">Une première réponse claire et personnalisée.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">100%</div>
+        <div class="estat-label">Sur mesure</div>
+        <div class="estat-desc">Chaque mission est conçue selon vos besoins.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">5★</div>
+        <div class="estat-label">Note client</div>
+        <div class="estat-desc">Satisfaction totale sur chaque mission.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">[Zone]</div>
+        <div class="estat-label">Zone d'intervention</div>
+        <div class="estat-desc">[Votre ville] et [zone géographique].</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TÉMOIGNAGES -->
+<div class="temoignages-bg">
+  <div class="temoignages-inner">
+    <div class="label">Ils nous font confiance</div>
+    <h2 class="section-title">Ce que disent<br>nos <em>clients.</em></h2>
+    <div class="temo-grid">
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 1 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 2 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 3 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="label">Contact</div>
+      <h2 class="section-title">Parlons de votre<br><em>projet.</em></h2>
+      <p class="contact-desc">Décrivez-nous votre besoin : contexte, échéance, envies. Nous revenons vers vous sous 24h avec une proposition sur mesure.</p>
+      <div class="contact-line">
+        <div class="cl-icon">✉</div>
+        <div><div class="cl-label">Email</div><div class="cl-value">[votre-email@domaine.com]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📞</div>
+        <div><div class="cl-label">Téléphone</div><div class="cl-value">[+33 X XX XX XX XX]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📍</div>
+        <div><div class="cl-label">Adresse</div><div class="cl-value">[Adresse complète, Votre ville]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📱</div>
+        <div><div class="cl-label">Réseaux</div><div class="cl-value"><a href="https://instagram.com/[votre-compte]" target="_blank">@[votre-compte]</a></div></div>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <form id="contactForm" onsubmit="return false;">
+        <div class="form-row">
+          <div>
+            <label class="form-label">Prénom & nom *</label>
+            <input type="text" class="form-input" id="cfName" placeholder="Votre nom complet">
+          </div>
+          <div>
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-input" id="cfEmail" placeholder="Votre email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="form-label">Téléphone</label>
+            <input type="tel" class="form-input" id="cfPhone" placeholder="Votre téléphone">
+          </div>
+          <div>
+            <label class="form-label">Sujet</label>
+            <select class="form-select" id="cfSubject">
+              <option>[Service 1]</option>
+              <option>[Service 2]</option>
+              <option>[Service 3]</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+        </div>
+        <label class="form-label">Votre message *</label>
+        <textarea class="form-textarea" id="cfMessage" placeholder="Décrivez votre projet, vos envies, vos contraintes…"></textarea>
+        <button class="form-submit" type="button" onclick="submitForm()">Envoyer ma demande</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✦</div>
+        <div class="form-success-title">Merci !</div>
+        <p class="form-success-text">Votre demande a bien été envoyée.<br>[Nom de votre marque] vous recontacte sous <strong>24h</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function submitForm() {
+  const name = document.getElementById('cfName').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const message = document.getElementById('cfMessage').value.trim();
+  if (!name || !email || !message) { alert('Merci de renseigner votre nom, votre email et votre message.'); return; }
+
+  const phone = document.getElementById('cfPhone').value.trim();
+  const subject = document.getElementById('cfSubject').value;
+
+  const body = `Nom : ${name}\nEmail : ${email}\nTéléphone : ${phone}\nSujet : ${subject}\n\nMessage :\n${message}`;
+
+  window.location.href = `mailto:[votre-email@domaine.com]?subject=${encodeURIComponent('Demande de contact - ' + subject)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('active');
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">[Nom de votre marque]</div>
+    <div class="footer-copy">© 2026 [Nom de votre marque] · Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="https://instagram.com/[votre-compte]" target="_blank">Instagram</a>
+      <a href="#contact">Contact</a>
+      <a href="#services">Services</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a href="mailto:[votre-email@domaine.com]" class="fab-btn" title="Contact rapide">✉</a>
+
+</body>
+</html>

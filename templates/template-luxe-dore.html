@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nom de votre marque] — [Votre activité] à [Votre ville]</title>
+<meta name="description" content="[Nom de votre marque], [courte description de votre activité] à [Votre ville].">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5B0;
+  --gold-dark: #9E7A42;
+  --dark: #0D0D0D;
+  --dark2: #161616;
+  --dark3: #1E1E1E;
+  --card: #1A1A1A;
+  --white: #FFFFFF;
+  --muted: rgba(255,255,255,0.55);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,169,110,0.15);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+
+.nav-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.burger {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.burger:hover { background: var(--gold-light); }
+.burger span {
+  display: block;
+  width: 18px; height: 2px;
+  background: var(--dark);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: var(--dark);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding-top: 5rem;
+}
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+.mobile-menu hr {
+  width: 2rem;
+  border: none;
+  border-top: 1px solid rgba(201,169,110,0.3);
+}
+
+.mobile-menu .mobile-social {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-btn {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 0.6rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s;
+}
+.nav-btn:hover { background: var(--gold-dark); color: white; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5rem 2.5rem 5rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a0f05 0%, #0d0d0d 40%, #1a1208 100%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 15%; left: 55%;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(201,169,110,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  top: 25%; left: 30%;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(201,169,110,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+.hero-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .gold { color: var(--gold); font-style: italic; }
+
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.hero-sub strong { color: rgba(255,255,255,0.85); font-weight: 400; }
+
+.hero-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.1em; }
+
+.stars-text { font-size: 0.8rem; color: var(--muted); }
+.stars-text strong { color: var(--gold); font-weight: 500; }
+
+.hero-avatars { display: flex; }
+
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  margin-left: -8px;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--dark);
+  overflow: hidden;
+}
+.avatar:first-child { margin-left: 0; }
+
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  padding: 1rem 2.2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s;
+}
+.btn-gold:hover { background: var(--gold-dark); color: white; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 1rem 2.2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s;
+}
+.btn-outline:hover { background: var(--gold); color: var(--dark); }
+
+/* Hero feature chips */
+.hero-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.hero-service-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,169,110,0.2);
+  backdrop-filter: blur(8px);
+  padding: 1.2rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.hero-service-card:hover { background: rgba(201,169,110,0.1); border-color: var(--gold); }
+.hero-service-icon { font-size: 1.4rem; }
+.hero-service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+}
+.hero-service-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+/* ── CHIFFRES ── */
+.numbers-band { background: var(--gold); padding: 3rem 2.5rem; }
+
+.numbers-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.num-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(13,13,13,0.65);
+  margin-bottom: 0.3rem;
+}
+
+.num-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem;
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1;
+}
+
+.num-desc { font-size: 0.75rem; color: rgba(13,13,13,0.6); margin-top: 0.3rem; }
+
+/* ── SECTIONS ── */
+.section { padding: 5rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.section-full { padding: 5rem 2.5rem; }
+
+.label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.label::after { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.section-title .gold { color: var(--gold); font-style: italic; }
+
+.section-desc {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 3rem;
+}
+
+/* ── SERVICES ── */
+.services-list { display: flex; flex-direction: column; gap: 2px; }
+
+.service-item {
+  background: var(--card);
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  align-items: start;
+  transition: background 0.3s;
+  cursor: default;
+}
+.service-item:hover { background: #222; }
+
+.service-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+.service-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
+
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+.tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--gold);
+  padding: 0.3rem 0.8rem;
+}
+
+/* ── MÉTHODE ── */
+.methode-bg { background: var(--dark2); padding: 5rem 2.5rem; }
+.methode-inner { max-width: 1100px; margin: 0 auto; }
+
+.methode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 3rem;
+  background: rgba(201,169,110,0.1);
+}
+
+.methode-card { background: var(--dark2); padding: 2.5rem 2rem; text-align: center; }
+.methode-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+
+.methode-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+
+.methode-desc { font-size: 0.82rem; line-height: 1.7; color: var(--muted); }
+
+/* ── GALERIE ── */
+.galerie-bg { background: var(--dark3); padding: 5rem 2.5rem; }
+.galerie-inner { max-width: 1100px; margin: 0 auto; }
+
+.galerie-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 3px;
+  margin-top: 3rem;
+}
+
+.galerie-item { position: relative; overflow: hidden; }
+.galerie-item:first-child { grid-row: 1 / 3; }
+
+.galerie-ph {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  transition: transform 0.5s;
+}
+.galerie-item:hover .galerie-ph { transform: scale(1.03); }
+
+.g1 { background: linear-gradient(160deg, #2a1a0a, #1a0f05); }
+.g2 { background: linear-gradient(160deg, #1a1a2e, #0d0d1a); }
+.g3 { background: linear-gradient(160deg, #1a0a0a, #0d0505); }
+.g4 { background: linear-gradient(160deg, #0a1a0a, #05100a); }
+.g5 { background: linear-gradient(160deg, #1a1208, #0d0b05); }
+
+.galerie-cap {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.7);
+}
+
+/* ── ENGAGEMENT ── */
+.engage-band { background: var(--gold); padding: 4rem 2.5rem; }
+
+.engage-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.engage-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1.1;
+}
+
+.engage-desc { font-size: 0.88rem; line-height: 1.8; color: rgba(13,13,13,0.7); margin-top: 1rem; }
+
+.engage-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.estat { background: rgba(13,13,13,0.1); padding: 1.5rem; }
+
+.estat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1;
+}
+
+.estat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(13,13,13,0.6);
+  margin-top: 0.3rem;
+}
+
+.estat-desc { font-size: 0.78rem; color: rgba(13,13,13,0.55); margin-top: 0.4rem; line-height: 1.5; }
+
+/* ── TÉMOIGNAGES ── */
+.temoignages-bg { background: var(--dark); padding: 5rem 2.5rem; }
+.temoignages-inner { max-width: 1100px; margin: 0 auto; }
+
+.temo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 3rem;
+  background: rgba(201,169,110,0.08);
+}
+
+.temo-card { background: var(--dark); padding: 2rem; }
+.temo-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; }
+
+.temo-text {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.temo-author {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.temo-context { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.2rem; }
+
+/* ── CONTACT ── */
+.contact-bg { background: var(--dark2); padding: 5rem 2.5rem; }
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-info .section-title { margin-bottom: 0.8rem; }
+
+.contact-desc { font-size: 0.88rem; line-height: 1.8; color: var(--muted); margin-bottom: 2.5rem; }
+
+.contact-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.contact-line:first-of-type { border-top: 1px solid rgba(255,255,255,0.06); }
+
+.cl-icon { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+.cl-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.2rem;
+}
+
+.cl-value { font-size: 0.9rem; color: var(--white); }
+.cl-value a { color: var(--gold); text-decoration: none; }
+
+/* Contact form */
+.form-wrap {
+  background: var(--dark3);
+  border: 1px solid rgba(201,169,110,0.15);
+  padding: 2.5rem;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.form-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(201,169,110,0.3);
+  padding: 0.8rem 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s;
+  margin-bottom: 1.5rem;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-select option { background: var(--dark3); color: white; }
+
+.form-textarea { resize: none; min-height: 100px; border: 1px solid rgba(201,169,110,0.3); padding: 0.8rem; border-radius: 4px; }
+.form-textarea:focus { border-color: var(--gold); }
+
+.form-submit {
+  background: var(--gold);
+  border: none;
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-radius: 3px;
+  width: 100%;
+}
+.form-submit:hover { background: var(--gold-dark); color: white; }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem 0;
+}
+.form-success.active { display: block; }
+.form-success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.form-success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.form-success-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer { background: #080808; padding: 2.5rem 2.5rem; border-top: 1px solid rgba(201,169,110,0.12); }
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; }
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* ── FAB ── */
+.fab-btn {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 300;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(201,169,110,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 1.5rem;
+}
+.fab-btn:hover { transform: scale(1.08); box-shadow: 0 6px 25px rgba(201,169,110,0.5); }
+
+.gold-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-btn { display: none; }
+  .burger { display: flex; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero-services { grid-template-columns: 1fr; }
+  .numbers-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .section { padding: 3.5rem 1.5rem; }
+  .section-full { padding: 3.5rem 1.5rem; }
+  .methode-bg, .galerie-bg, .engage-band, .temoignages-bg, .contact-bg { padding: 3.5rem 1.5rem; }
+  .service-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+  .service-num { font-size: 2.5rem; }
+  .methode-grid { grid-template-columns: 1fr; }
+  .galerie-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .galerie-item:first-child { grid-row: auto; grid-column: 1 / 3; height: 220px; }
+  .galerie-item { height: 160px; }
+  .engage-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .engage-stats { grid-template-columns: 1fr 1fr; }
+  .temo-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .numbers-band { padding: 2.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE : "Luxe Doré" — ambiance sombre & premium (artisanat haut de gamme, joaillerie, conciergerie, gastronomie).
+  RECOLORATION : modifiez les variables CSS dans :root (--gold, --gold-light, --gold-dark, --dark, --dark2, --dark3, --card, --white, --muted).
+  À REMPLACER : tous les textes entre crochets, ex. [Nom de votre marque], [Votre ville], [votre-email@domaine.com], [+33 X XX XX XX XX],
+  [@votre-compte], ainsi que les liens tel:, mailto: et wa.me, et l'adresse email cible dans le script du formulaire de contact.
+  IDs d'ancrage conservés à l'identique sur les 5 templates : #methode, #galerie, #contact.
+-->
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">[Nom de votre marque]</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Devis gratuit</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <hr>
+  <a href="#methode">Notre méthode</a>
+  <hr>
+  <a href="#galerie">Galerie</a>
+  <hr>
+  <a href="#contact">Contact</a>
+  <a href="https://instagram.com/[votre-compte]" target="_blank" class="mobile-social">@[votre-compte]</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('burgerBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    closeMenu();
+    setTimeout(() => {
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+});
+</script>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">[Secteur d'activité] · [Votre ville]</div>
+    <h1 class="hero-title">
+      Un savoir-faire<br>
+      <span class="gold">d'exception,</span><br>
+      pensé pour vous.
+    </h1>
+    <p class="hero-sub">
+      <strong>[Votre promesse en une phrase].</strong> [Nom de votre marque] compose des expériences sur mesure où chaque détail est orchestré avec soin et exigence.
+    </p>
+    <div class="hero-stars">
+      <div class="hero-avatars">
+        <div class="avatar">A</div>
+        <div class="avatar">B</div>
+        <div class="avatar">C</div>
+      </div>
+      <div class="stars">★★★★★</div>
+      <div class="stars-text"><strong>5.0</strong> · Ils nous font confiance</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-gold">Devis gratuit</a>
+      <a href="tel:+33600000000" class="btn-outline">Appelez-nous</a>
+    </div>
+    <div class="hero-services">
+      <a href="#services" class="hero-service-card">
+        <div class="hero-service-icon">✦</div>
+        <div class="hero-service-name">[Service 1]</div>
+        <div class="hero-service-desc">[Courte description du service]</div>
+      </a>
+      <a href="#services" class="hero-service-card">
+        <div class="hero-service-icon">◆</div>
+        <div class="hero-service-name">[Service 2]</div>
+        <div class="hero-service-desc">[Courte description du service]</div>
+      </a>
+      <a href="#services" class="hero-service-card">
+        <div class="hero-service-icon">✧</div>
+        <div class="hero-service-name">[Service 3]</div>
+        <div class="hero-service-desc">[Courte description du service]</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CHIFFRES -->
+<div class="numbers-band">
+  <div class="numbers-inner">
+    <div class="num-item">
+      <div class="num-label">Réactivité</div>
+      <div class="num-value">24h</div>
+      <div class="num-desc">Première réponse personnalisée</div>
+    </div>
+    <div class="num-item">
+      <div class="num-label">Satisfaction</div>
+      <div class="num-value">98%</div>
+      <div class="num-desc">Clients qui nous recommandent</div>
+    </div>
+    <div class="num-item">
+      <div class="num-label">Réalisations</div>
+      <div class="num-value">120+</div>
+      <div class="num-desc">Projets menés avec exigence</div>
+    </div>
+  </div>
+</div>
+
+<div class="gold-line"></div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="label">Nos services</div>
+  <h2 class="section-title">Ce que nous <span class="gold">proposons.</span></h2>
+  <p class="section-desc">[Nom de votre marque] vous accompagne avec un ensemble de prestations pensées pour répondre précisément à vos besoins.</p>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-body">
+        <div class="service-name">[Nom du service 1]</div>
+        <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+        <div class="service-tags"><span class="tag">[Mot-clé]</span><span class="tag">[Mot-clé]</span><span class="tag">[Mot-clé]</span></div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-body">
+        <div class="service-name">[Nom du service 2]</div>
+        <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+        <div class="service-tags"><span class="tag">[Mot-clé]</span><span class="tag">[Mot-clé]</span></div>
+      </div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-body">
+        <div class="service-name">[Nom du service 3]</div>
+        <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+        <div class="service-tags"><span class="tag">[Mot-clé]</span><span class="tag">[Mot-clé]</span><span class="tag">[Mot-clé]</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MÉTHODE -->
+<div class="methode-bg" id="methode">
+  <div class="methode-inner">
+    <div class="label">Notre méthode</div>
+    <h2 class="section-title">Une méthode <span class="gold">claire,</span><br>sans surprise.</h2>
+    <p class="section-desc">Faites confiance à une maison capable de créer des expériences sur mesure, du premier échange à la livraison finale.</p>
+    <div class="methode-grid">
+      <div class="methode-card">
+        <span class="methode-icon">👂</span>
+        <div class="methode-title">On vous écoute vraiment</div>
+        <p class="methode-desc">On comprend votre vision, vos attentes, votre budget. Pas de formule toute faite.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">✨</span>
+        <div class="methode-title">On conçoit votre projet</div>
+        <p class="methode-desc">Cahier des charges, création, validation : on pense à tout pour un résultat à la hauteur.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">🎯</span>
+        <div class="methode-title">On livre avec exigence</div>
+        <p class="methode-desc">Le jour J, vous profitez du résultat. On s'occupe de tout le reste, dans les moindres détails.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIE -->
+<div class="galerie-bg" id="galerie">
+  <div class="galerie-inner">
+    <div class="label">Nos réalisations</div>
+    <h2 class="section-title">Des projets pensés<br>dans les <span class="gold">moindres détails.</span></h2>
+    <div class="galerie-grid">
+      <div class="galerie-item">
+        <div class="galerie-ph g1"><span class="galerie-cap">[Projet 1 — nom du client]</span></div>
+      </div>
+      <div class="galerie-item" style="height:220px;">
+        <div class="galerie-ph g2"><span class="galerie-cap">[Projet 2 — nom du client]</span></div>
+      </div>
+      <div class="galerie-item" style="height:220px;">
+        <div class="galerie-ph g3"><span class="galerie-cap">[Projet 3 — nom du client]</span></div>
+      </div>
+      <div class="galerie-item" style="height:220px;">
+        <div class="galerie-ph g4"><span class="galerie-cap">[Projet 4 — nom du client]</span></div>
+      </div>
+      <div class="galerie-item" style="height:220px;">
+        <div class="galerie-ph g5"><span class="galerie-cap">[Projet 5 — nom du client]</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENGAGEMENT -->
+<div class="engage-band">
+  <div class="engage-inner">
+    <div>
+      <h2 class="engage-title">Votre maison de confiance,<br>nouvelle génération.</h2>
+      <p class="engage-desc">Une nouvelle génération de service. Exigence, exécution maîtrisée, réponse rapide. Un engagement de qualité intégré à chaque étape.</p>
+    </div>
+    <div class="engage-stats">
+      <div class="estat">
+        <div class="estat-num">24h</div>
+        <div class="estat-label">Réactivité</div>
+        <div class="estat-desc">Une première réponse claire, rapide et personnalisée.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">100%</div>
+        <div class="estat-label">Sur mesure</div>
+        <div class="estat-desc">Chaque projet est conçu selon vos besoins précis.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">5★</div>
+        <div class="estat-label">Note client</div>
+        <div class="estat-desc">Satisfaction totale sur chaque prestation réalisée.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-num">[Zone]</div>
+        <div class="estat-label">Zone d'intervention</div>
+        <div class="estat-desc">[Votre ville] et [zone géographique] couverte.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TÉMOIGNAGES -->
+<div class="temoignages-bg">
+  <div class="temoignages-inner">
+    <div class="label">Ils nous font confiance</div>
+    <h2 class="section-title">Ce que disent<br>nos <span class="gold">clients.</span></h2>
+    <div class="temo-grid">
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 1 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 2 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 3 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Ville]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="label">Contact & Devis</div>
+      <h2 class="section-title">Parlons de votre<br><span class="gold">projet.</span></h2>
+      <p class="contact-desc">Décrivez-nous votre besoin : contexte, échéance, envies. Nous revenons vers vous sous 24h avec une proposition sur mesure.</p>
+      <div class="contact-line">
+        <div class="cl-icon">✉</div>
+        <div><div class="cl-label">Email</div><div class="cl-value">[votre-email@domaine.com]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📞</div>
+        <div><div class="cl-label">Téléphone</div><div class="cl-value">[+33 X XX XX XX XX]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📍</div>
+        <div><div class="cl-label">Adresse</div><div class="cl-value">[Adresse complète, Votre ville]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">📱</div>
+        <div><div class="cl-label">Réseaux</div><div class="cl-value"><a href="https://instagram.com/[votre-compte]" target="_blank">@[votre-compte]</a></div></div>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <div class="form-wrap">
+      <form id="contactForm" onsubmit="return false;">
+        <div class="form-row">
+          <div>
+            <label class="form-label">Prénom & nom *</label>
+            <input type="text" class="form-input" id="cfName" placeholder="Votre nom complet">
+          </div>
+          <div>
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-input" id="cfEmail" placeholder="Votre email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="form-label">Téléphone</label>
+            <input type="tel" class="form-input" id="cfPhone" placeholder="Votre téléphone">
+          </div>
+          <div>
+            <label class="form-label">Sujet</label>
+            <select class="form-select" id="cfSubject">
+              <option>[Service 1]</option>
+              <option>[Service 2]</option>
+              <option>[Service 3]</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+        </div>
+        <label class="form-label">Votre message *</label>
+        <textarea class="form-textarea" id="cfMessage" placeholder="Décrivez votre projet, vos envies, vos contraintes…"></textarea>
+        <button class="form-submit" type="button" onclick="submitForm()">Envoyer ma demande</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✦</div>
+        <div class="form-success-title">Merci !</div>
+        <p class="form-success-text">Votre demande a bien été envoyée.<br>[Nom de votre marque] vous recontacte sous <strong style="color:var(--gold)">24h</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function submitForm() {
+  const name = document.getElementById('cfName').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const message = document.getElementById('cfMessage').value.trim();
+  if (!name || !email || !message) { alert('Merci de renseigner votre nom, votre email et votre message.'); return; }
+
+  const phone = document.getElementById('cfPhone').value.trim();
+  const subject = document.getElementById('cfSubject').value;
+
+  const body = `Nom : ${name}\nEmail : ${email}\nTéléphone : ${phone}\nSujet : ${subject}\n\nMessage :\n${message}`;
+
+  window.location.href = `mailto:[votre-email@domaine.com]?subject=${encodeURIComponent('Demande de contact - ' + subject)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('active');
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">[Nom de votre marque]</div>
+    <div class="footer-copy">© 2026 [Nom de votre marque] · Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="https://instagram.com/[votre-compte]" target="_blank">Instagram</a>
+      <a href="#contact">Contact</a>
+      <a href="#services">Services</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a href="https://wa.me/33600000000" target="_blank" class="fab-btn" title="Contact rapide">💬</a>
+
+</body>
+</html>
