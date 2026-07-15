@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nom de votre marque] — [Votre activité] à [Votre ville]</title>
+<meta name="description" content="[Nom de votre marque], [courte description de votre activité] à [Votre ville].">
+<!-- Polices : Sora pour les titres (géométrique, nette, très lisible en grand corps — signature "produit tech" sans tomber dans le générique des sans-serifs système),
+     JetBrains Mono utilisé avec parcimonie pour les eyebrows/labels/nombres (code-like, renforce le côté SaaS/dev sans surcharger la lecture),
+     Inter pour le corps de texte (neutre, excellente lisibilité longue durée). -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0A0E14;
+  --surface: #12161F;
+  --surface2: #181D28;
+  --ink: #E7EAF0;
+  --muted: rgba(231,234,240,0.55);
+  --accent: #5EEAD4;
+  --accent-dim: rgba(94,234,212,0.15);
+  --line: rgba(94,234,212,0.15);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .nav-logo, .num-value, .estat-num { font-family: 'Sora', sans-serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 3rem;
+  background: rgba(10,14,20,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-right { display: flex; align-items: center; gap: 1.8rem; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a::before { content: "// "; color: var(--accent); opacity: 0.7; }
+.nav-links a:hover { color: var(--ink); }
+
+.burger {
+  display: none;
+  width: 42px; height: 42px;
+  border-radius: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  transition: border-color 0.3s;
+}
+.burger:hover { border-color: var(--accent); }
+.burger span { display: block; width: 18px; height: 1.5px; background: var(--accent); transition: all 0.3s; }
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  padding-top: 5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 0.3s; }
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu hr { width: 2rem; border: none; border-top: 1px solid var(--line); }
+.mobile-menu .mobile-social { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent); }
+
+.nav-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--accent-dim);
+  color: var(--accent);
+  padding: 0.65rem 1.3rem;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s, border-color 0.3s;
+}
+.nav-btn:hover { background: rgba(94,234,212,0.25); border-color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 96vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8rem 3rem 4rem;
+  overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(94,234,212,0.05) 0px, rgba(94,234,212,0.05) 1px, transparent 1px, transparent 64px),
+    repeating-linear-gradient(90deg, rgba(94,234,212,0.05) 0px, rgba(94,234,212,0.05) 1px, transparent 1px, transparent 64px);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 75%);
+  z-index: 0;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.9rem;
+  border-radius: 2px;
+  margin-bottom: 1.8rem;
+}
+
+.hero-title {
+  font-size: clamp(2.3rem, 5.2vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+}
+.hero-title .accent { color: var(--accent); }
+
+.hero-sub { font-size: 1rem; line-height: 1.75; color: var(--muted); max-width: 480px; margin-bottom: 1.8rem; }
+
+.hero-stars { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+.stars { color: var(--accent); font-size: 1rem; letter-spacing: 0.1em; }
+.stars-text { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); }
+.stars-text strong { color: var(--ink); font-weight: 700; }
+
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.2rem; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #06110F;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(94,234,212,0.25); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.9rem 2rem;
+  border-radius: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.3s, color 0.3s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-chips { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.badge::before { content: "<"; color: var(--accent); }
+.badge::after { content: "/>"; color: var(--accent); }
+
+/* Terminal mock (CSS only) */
+.terminal {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.term-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--line);
+}
+.term-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(231,234,240,0.2); }
+.term-dot:nth-child(1) { background: #FF6B6B; opacity: 0.7; }
+.term-dot:nth-child(2) { background: #FFC24B; opacity: 0.7; }
+.term-dot:nth-child(3) { background: var(--accent); opacity: 0.85; }
+.term-title { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-left: 0.5rem; }
+.term-body { padding: 1.4rem 1.3rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.9; }
+.term-line { display: flex; gap: 0.6rem; white-space: nowrap; overflow: hidden; }
+.term-prompt { color: var(--accent); flex-shrink: 0; }
+.term-out { color: var(--muted); }
+.term-ok { color: var(--accent); }
+.term-cursor { display: inline-block; width: 7px; height: 14px; background: var(--accent); margin-left: 2px; animation: blink 1s step-end infinite; vertical-align: middle; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── STATS ── */
+.numbers-band { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 3.5rem 2.5rem; position: relative; z-index: 1; }
+.numbers-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); text-align: left; }
+.num-item { padding: 0 2rem; border-left: 1px solid var(--line); }
+.num-item:first-child { border-left: none; padding-left: 0; }
+.num-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); margin-bottom: 0.6rem; }
+.num-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.5rem; }
+.num-value { font-size: 2.6rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.num-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
+
+/* ── SECTIONS ── */
+.section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.section-full { padding: 6rem 2.5rem; }
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.label::before { content: "//"; opacity: 0.6; }
+
+.section-title { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; color: var(--ink); margin-bottom: 1.1rem; }
+.section-title .accent { color: var(--accent); }
+
+.section-desc { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 560px; margin-bottom: 3.2rem; }
+
+/* ── SERVICES ── */
+.services-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.service-item { background: var(--surface); padding: 2.2rem; transition: background 0.3s; }
+.service-item:hover { background: var(--surface2); }
+.service-num { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); margin-bottom: 0.9rem; }
+.service-name { font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.7rem; }
+.service-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); margin-bottom: 1rem; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); background: var(--accent-dim); padding: 0.3rem 0.7rem; border-radius: 2px; }
+
+/* ── MÉTHODE ── */
+.methode-bg { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6rem 2.5rem; }
+.methode-inner { max-width: 1100px; margin: 0 auto; }
+.methode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 3rem; }
+.methode-card { background: var(--surface); padding: 2.2rem; }
+.methode-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 1.2rem; display: block; }
+.methode-title { font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.7rem; }
+.methode-desc { font-size: 0.85rem; line-height: 1.75; color: var(--muted); }
+
+/* ── GALERIE ── */
+.galerie-bg { background: var(--bg); padding: 6rem 2.5rem; }
+.galerie-inner { max-width: 1100px; margin: 0 auto; }
+.galerie-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 1px; margin-top: 3rem; background: var(--line); border: 1px solid var(--line); }
+.galerie-item { position: relative; overflow: hidden; background: var(--surface); }
+.galerie-item:first-child { grid-row: 1 / 3; }
+.galerie-ph { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1.2rem; position: relative; }
+.galerie-ph::before { content: attr(data-idx); position: absolute; top: 1rem; left: 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); }
+.g1 { background: linear-gradient(160deg, var(--surface), var(--surface2)); }
+.g2 { background: linear-gradient(160deg, var(--surface2), var(--surface)); }
+.g3 { background: linear-gradient(160deg, var(--surface), #0d1119); }
+.g4 { background: linear-gradient(160deg, #0d1119, var(--surface2)); }
+.g5 { background: linear-gradient(160deg, var(--surface2), #0d1119); }
+.galerie-cap { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--ink); background: rgba(10,14,20,0.6); border: 1px solid var(--line); padding: 0.4rem 0.8rem; border-radius: 2px; }
+
+/* ── ENGAGEMENT ── */
+.engage-band { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 5rem 2.5rem; }
+.engage-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.engage-title { font-size: clamp(1.8rem, 3.6vw, 2.4rem); font-weight: 700; color: var(--ink); line-height: 1.25; }
+.engage-desc { font-size: 0.9rem; line-height: 1.8; color: var(--muted); margin-top: 1.1rem; }
+.engage-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.estat { background: var(--surface2); padding: 1.5rem; }
+.estat-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); margin-bottom: 0.4rem; }
+.estat-num { font-size: 2rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.estat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 0.4rem; }
+.estat-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.5; }
+
+/* ── TÉMOIGNAGES ── */
+.temoignages-bg { background: var(--bg); padding: 6rem 2.5rem; }
+.temoignages-inner { max-width: 1100px; margin: 0 auto; }
+.temo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 3rem; }
+.temo-card { background: var(--surface); padding: 2rem; }
+.temo-stars { color: var(--accent); font-size: 0.85rem; margin-bottom: 1rem; }
+.temo-text { font-size: 0.9rem; line-height: 1.7; color: var(--ink); margin-bottom: 1.4rem; }
+.temo-author { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+.temo-context { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ── CONTACT ── */
+.contact-bg { background: var(--surface); border-top: 1px solid var(--line); padding: 6rem 2.5rem; }
+.contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-desc { font-size: 0.92rem; line-height: 1.8; color: var(--muted); margin-bottom: 2.2rem; }
+.contact-line { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+.contact-line:first-of-type { border-top: 1px solid var(--line); }
+.cl-icon { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+.cl-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.2rem; }
+.cl-value { font-size: 0.92rem; color: var(--ink); }
+.cl-value a { color: var(--accent); text-decoration: none; }
+
+.form-wrap { background: var(--surface2); border: 1px solid var(--line); border-radius: 4px; padding: 2.4rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.form-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.4rem; display: block; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.8rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+  margin-bottom: 1.2rem;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(231,234,240,0.3); }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+.form-select option { background: var(--surface2); }
+.form-textarea { resize: none; min-height: 100px; }
+.form-submit {
+  background: var(--accent);
+  border: none;
+  color: #06110F;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.95rem 2rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 2px;
+  width: 100%;
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(94,234,212,0.25); }
+.form-success { display: none; text-align: center; padding: 2rem 0; }
+.form-success.active { display: block; }
+.form-success-icon { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; margin-bottom: 1rem; color: var(--accent); }
+.form-success-title { font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+.form-success-text { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer { background: var(--bg); padding: 2.6rem 2.5rem; border-top: 1px solid var(--line); }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.6rem; }
+.footer-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ── FAB ── */
+.fab-btn {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 300;
+  width: 54px; height: 54px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #06110F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(94,234,212,0.35);
+  transition: transform 0.3s;
+  font-size: 1.3rem;
+  border: 1px solid var(--line);
+}
+.fab-btn:hover { transform: scale(1.08); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-btn { display: none; }
+  .burger { display: flex; }
+  .hero { padding: 6.5rem 1.5rem 3rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .term-line { white-space: normal; }
+  .numbers-inner { grid-template-columns: 1fr; gap: 1.6rem; }
+  .num-item { border-left: none; padding: 0; border-top: 1px solid var(--line); padding-top: 1.4rem; }
+  .num-item:first-child { border-top: none; padding-top: 0; }
+  .section { padding: 3.5rem 1.5rem; }
+  .section-full { padding: 3.5rem 1.5rem; }
+  .methode-bg, .galerie-bg, .engage-band, .temoignages-bg, .contact-bg { padding: 3.5rem 1.5rem; }
+  .services-list { grid-template-columns: 1fr; }
+  .methode-grid { grid-template-columns: 1fr; }
+  .galerie-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .galerie-item:first-child { grid-row: auto; grid-column: 1 / 3; height: 200px; }
+  .galerie-item { height: 150px; }
+  .engage-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .engage-stats { grid-template-columns: 1fr 1fr; }
+  .temo-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .numbers-band { padding: 2.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!--
+  TEMPLATE : "Néo-Tech Sombre" — ambiance dark-mode SaaS/produit tech (startup, éditeur logiciel, studio produit, agence dev).
+  RECOLORATION : modifiez les variables CSS dans :root (--bg, --surface, --surface2, --ink, --muted, --accent, --accent-dim, --line).
+  --accent est la seule couleur d'accent (cyan/teal) : gardez-la unique, pas de dégradés multicolores.
+  À REMPLACER : tous les textes entre crochets, ex. [Nom de votre marque], [Votre ville], [votre-email@domaine.com], [+33 X XX XX XX XX],
+  [@votre-compte], ainsi que les liens tel:, mailto: et wa.me, et l'adresse email cible dans le script du formulaire de contact.
+  IDs d'ancrage conservés à l'identique sur tous les templates : #methode, #galerie, #contact, #services.
+-->
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">[Nom<span>.</span>marque]</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <hr>
+  <a href="#methode">Notre méthode</a>
+  <hr>
+  <a href="#galerie">Galerie</a>
+  <hr>
+  <a href="#contact">Contact</a>
+  <a href="https://linkedin.com/company/[votre-compte]" target="_blank" class="mobile-social">LinkedIn</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('burgerBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    closeMenu();
+    setTimeout(() => {
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+});
+</script>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">&lt; [Secteur d'activité] · [Votre ville] /&gt;</span>
+      <h1 class="hero-title">Des produits <span class="accent">solides,</span> livrés sans friction.</h1>
+      <p class="hero-sub">[Votre promesse en une phrase]. Nous accompagnons [type de client] avec une méthode rigoureuse, un code propre et une exécution rapide.</p>
+      <div class="hero-stars">
+        <div class="stars">★★★★★</div>
+        <div class="stars-text"><strong>5.0</strong> · noté par nos clients</div>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Démarrer un projet</a>
+        <a href="tel:+33600000000" class="btn-outline">Appelez-nous</a>
+      </div>
+      <div class="hero-chips">
+        <div class="badge">[Service 1]</div>
+        <div class="badge">[Service 2]</div>
+        <div class="badge">[Service 3]</div>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="term-top">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        <span class="term-title">~/[nom-du-projet] — zsh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="term-prompt">$</span><span>npm run deploy</span></div>
+        <div class="term-line"><span class="term-out">→ build compilé en 4.2s</span></div>
+        <div class="term-line"><span class="term-out">→ tests : 128 passés / 128</span></div>
+        <div class="term-line"><span class="term-ok">✓ déployé sur [environnement de prod]</span></div>
+        <div class="term-line"><span class="term-prompt">$</span><span class="term-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHIFFRES -->
+<div class="numbers-band">
+  <div class="numbers-inner">
+    <div class="num-item">
+      <div class="num-tag">01 —</div>
+      <div class="num-label">Réactivité</div>
+      <div class="num-value">24h</div>
+      <div class="num-desc">Première réponse technique personnalisée</div>
+    </div>
+    <div class="num-item">
+      <div class="num-tag">02 —</div>
+      <div class="num-label">Satisfaction</div>
+      <div class="num-value">98%</div>
+      <div class="num-desc">Clients qui nous recommandent</div>
+    </div>
+    <div class="num-item">
+      <div class="num-tag">03 —</div>
+      <div class="num-label">Projets livrés</div>
+      <div class="num-value">120+</div>
+      <div class="num-desc">Déployés en production avec succès</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="label">Nos services</div>
+  <h2 class="section-title">Ce que nous <span class="accent">construisons.</span></h2>
+  <p class="section-desc">[Nom de votre marque] accompagne les équipes produit avec un ensemble de prestations pensées pour scaler vite et bien.</p>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01 —</div>
+      <div class="service-name">[Nom du service 1]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+      <div class="service-tags"><span class="tag">[stack]</span><span class="tag">[stack]</span></div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02 —</div>
+      <div class="service-name">[Nom du service 2]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+      <div class="service-tags"><span class="tag">[stack]</span><span class="tag">[stack]</span></div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03 —</div>
+      <div class="service-name">[Nom du service 3]</div>
+      <p class="service-desc">[Description détaillée du service, ce qu'il inclut, pour qui il est pensé.]</p>
+      <div class="service-tags"><span class="tag">[stack]</span><span class="tag">[stack]</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MÉTHODE -->
+<div class="methode-bg" id="methode">
+  <div class="methode-inner">
+    <div class="label">Notre méthode</div>
+    <h2 class="section-title">Une méthode <span class="accent">claire,</span><br>sans surprise.</h2>
+    <p class="section-desc">Faites confiance à une équipe capable de livrer des produits robustes, du premier échange à la mise en production.</p>
+    <div class="methode-grid">
+      <div class="methode-card">
+        <span class="methode-icon">01 —</span>
+        <div class="methode-title">Cadrage technique</div>
+        <p class="methode-desc">On analyse votre besoin, votre stack existante et vos contraintes de scalabilité.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">02 —</span>
+        <div class="methode-title">Build itératif</div>
+        <p class="methode-desc">Sprints courts, revues de code régulières, démos fréquentes : rien n'est laissé au hasard.</p>
+      </div>
+      <div class="methode-card">
+        <span class="methode-icon">03 —</span>
+        <div class="methode-title">Déploiement & suivi</div>
+        <p class="methode-desc">Mise en production, monitoring et accompagnement jusqu'à l'atteinte de vos objectifs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIE -->
+<div class="galerie-bg" id="galerie">
+  <div class="galerie-inner">
+    <div class="label">Nos réalisations</div>
+    <h2 class="section-title">Des projets livrés<br>en <span class="accent">production.</span></h2>
+    <div class="galerie-grid">
+      <div class="galerie-item"><div class="galerie-ph g1" data-idx="01"><span class="galerie-cap">[Projet 1 — nom du client]</span></div></div>
+      <div class="galerie-item"><div class="galerie-ph g2" data-idx="02"><span class="galerie-cap">[Projet 2 — nom du client]</span></div></div>
+      <div class="galerie-item"><div class="galerie-ph g3" data-idx="03"><span class="galerie-cap">[Projet 3 — nom du client]</span></div></div>
+      <div class="galerie-item"><div class="galerie-ph g4" data-idx="04"><span class="galerie-cap">[Projet 4 — nom du client]</span></div></div>
+      <div class="galerie-item"><div class="galerie-ph g5" data-idx="05"><span class="galerie-cap">[Projet 5 — nom du client]</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ENGAGEMENT -->
+<div class="engage-band">
+  <div class="engage-inner">
+    <div>
+      <h2 class="engage-title">Votre équipe produit,<br>nouvelle génération.</h2>
+      <p class="engage-desc">Une approche exigeante et transparente. Code propre, exécution maîtrisée, réponse rapide. Un engagement de qualité intégré à chaque étape.</p>
+    </div>
+    <div class="engage-stats">
+      <div class="estat">
+        <div class="estat-tag">01 —</div>
+        <div class="estat-num">24h</div>
+        <div class="estat-label">Réactivité</div>
+        <div class="estat-desc">Une première réponse claire et technique.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-tag">02 —</div>
+        <div class="estat-num">99.9%</div>
+        <div class="estat-label">Uptime visé</div>
+        <div class="estat-desc">Sur les environnements que nous opérons.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-tag">03 —</div>
+        <div class="estat-num">5★</div>
+        <div class="estat-label">Note client</div>
+        <div class="estat-desc">Satisfaction totale sur chaque mission.</div>
+      </div>
+      <div class="estat">
+        <div class="estat-tag">04 —</div>
+        <div class="estat-num">[Zone]</div>
+        <div class="estat-label">Zone d'intervention</div>
+        <div class="estat-desc">[Votre ville] et à distance, partout ailleurs.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TÉMOIGNAGES -->
+<div class="temoignages-bg">
+  <div class="temoignages-inner">
+    <div class="label">Ils nous font confiance</div>
+    <h2 class="section-title">Ce que disent<br>nos <span class="accent">clients.</span></h2>
+    <div class="temo-grid">
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 1 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Entreprise]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 2 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Entreprise]</div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-stars">★★★★★</div>
+        <p class="temo-text">"[Témoignage client 3 : décrivez l'expérience vécue, ce qui a marqué le client, le résultat obtenu.]"</p>
+        <div class="temo-author">[Prénom Nom]</div>
+        <div class="temo-context">[Contexte — Entreprise]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="label">Contact</div>
+      <h2 class="section-title">Parlons de votre<br><span class="accent">projet.</span></h2>
+      <p class="contact-desc">Décrivez-nous votre besoin : contexte, stack, échéance. Nous revenons vers vous sous 24h avec une proposition technique précise.</p>
+      <div class="contact-line">
+        <div class="cl-icon">@</div>
+        <div><div class="cl-label">Email</div><div class="cl-value">[votre-email@domaine.com]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">#</div>
+        <div><div class="cl-label">Téléphone</div><div class="cl-value">[+33 X XX XX XX XX]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">~</div>
+        <div><div class="cl-label">Adresse</div><div class="cl-value">[Adresse complète, Votre ville]</div></div>
+      </div>
+      <div class="contact-line">
+        <div class="cl-icon">&gt;</div>
+        <div><div class="cl-label">LinkedIn</div><div class="cl-value"><a href="https://linkedin.com/company/[votre-compte]" target="_blank">[Nom de votre marque]</a></div></div>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <form id="contactForm" onsubmit="return false;">
+        <div class="form-row">
+          <div>
+            <label class="form-label">// prénom & nom *</label>
+            <input type="text" class="form-input" id="cfName" placeholder="Votre nom complet">
+          </div>
+          <div>
+            <label class="form-label">// email *</label>
+            <input type="email" class="form-input" id="cfEmail" placeholder="Votre email professionnel">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="form-label">// téléphone</label>
+            <input type="tel" class="form-input" id="cfPhone" placeholder="Votre téléphone">
+          </div>
+          <div>
+            <label class="form-label">// sujet</label>
+            <select class="form-select" id="cfSubject">
+              <option>[Service 1]</option>
+              <option>[Service 2]</option>
+              <option>[Service 3]</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+        </div>
+        <label class="form-label">// message *</label>
+        <textarea class="form-textarea" id="cfMessage" placeholder="Décrivez votre projet, votre stack, vos contraintes…"></textarea>
+        <button class="form-submit" type="button" onclick="submitForm()">Envoyer ma demande</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✓</div>
+        <div class="form-success-title">Merci !</div>
+        <p class="form-success-text">Votre demande a bien été envoyée.<br>[Nom de votre marque] vous recontacte sous <strong style="color:var(--accent)">24h</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function submitForm() {
+  const name = document.getElementById('cfName').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const message = document.getElementById('cfMessage').value.trim();
+  if (!name || !email || !message) { alert('Merci de renseigner votre nom, votre email et votre message.'); return; }
+
+  const phone = document.getElementById('cfPhone').value.trim();
+  const subject = document.getElementById('cfSubject').value;
+
+  const body = `Nom : ${name}\nEmail : ${email}\nTéléphone : ${phone}\nSujet : ${subject}\n\nMessage :\n${message}`;
+
+  window.location.href = `mailto:[votre-email@domaine.com]?subject=${encodeURIComponent('Demande de contact - ' + subject)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('active');
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">[Nom<span>.</span>marque]</div>
+    <div class="footer-copy">© 2026 [Nom de votre marque] · Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/company/[votre-compte]" target="_blank">LinkedIn</a>
+      <a href="#contact">Contact</a>
+      <a href="#services">Services</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a href="mailto:[votre-email@domaine.com]" class="fab-btn" title="Contact rapide">&gt;_</a>
+
+</body>
+</html>
