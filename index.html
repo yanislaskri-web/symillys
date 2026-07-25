@@ -177,6 +177,12 @@
     text-transform:uppercase;cursor:pointer;transition:transform .2s ease, background .2s ease;}
   button[type=submit]:hover{transform:scale(1.02);background:var(--gold-dark);}
   .form-note{font-size:0.72rem;color:var(--muted);margin-top:-0.4rem;}
+  .form-consent{display:flex;align-items:flex-start;gap:0.7rem;font-size:0.8rem;color:var(--muted);line-height:1.5;}
+  .form-consent input[type=checkbox]{width:auto;flex-shrink:0;margin-top:0.2rem;accent-color:var(--gold);}
+  .form-consent a{color:var(--gold-text);text-decoration:underline;}
+  .footer-legal{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:0.8rem;font-size:0.7rem;letter-spacing:0.05em;}
+  .footer-legal a{color:rgba(43,38,32,0.6);}
+  .footer-legal a:hover{color:var(--gold-text);}
   @media(max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
 
   footer{padding:2.5rem 1.5rem;text-align:center;font-size:0.72rem;color:rgba(43,38,32,0.6);}
@@ -353,13 +359,24 @@
         <label for="message">Décrivez votre projet</label>
         <textarea id="message" name="message" required></textarea>
       </div>
+      <label class="form-consent">
+        <input type="checkbox" name="consentement" required>
+        <span>J'accepte que mes données soient utilisées pour traiter ma demande, conformément à la <a href="politique-confidentialite.html">politique de confidentialité</a>.</span>
+      </label>
       <button type="submit">Envoyer la demande</button>
       <p class="form-note">Nous vous répondons généralement sous 48h.</p>
     </form>
   </div>
 </section>
 
-<footer>© 2026 Symilly's — Agence événementielle. Tous droits réservés. · <a href="https://instagram.com/symillys" target="_blank" rel="noopener noreferrer">Instagram</a></footer>
+<footer>
+  <div class="footer-legal">
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+    <a href="cgu.html">CGU</a>
+  </div>
+  © 2026 Symilly's — Agence événementielle. Tous droits réservés. · <a href="https://instagram.com/symillys" target="_blank" rel="noopener noreferrer">Instagram</a>
+</footer>
 
 <a href="https://wa.me/33771126725" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Nous contacter sur WhatsApp" title="Nous contacter sur WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

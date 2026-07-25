@@ -1,0 +1,39 @@
+:root{
+  --gold:#B8874E; --gold-dark:#9E7239; --gold-text:#8A6134; --ink:#2B2620; --bg:#FFFFFF; --bg2:#FAF7F2; --muted:rgba(43,38,32,0.65);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+a:focus-visible, button:focus-visible{outline:2px solid var(--gold-dark); outline-offset:2px;}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+a{color:var(--gold-text);}
+
+.skip-link{
+  position:absolute; top:-100px; left:1rem; z-index:500;
+  background:var(--gold); color:#fff; padding:0.8rem 1.4rem;
+  font-size:0.85rem; font-weight:600; text-decoration:none; border-radius:2px;
+  transition:top .2s;
+}
+.skip-link:focus{ top:1rem; }
+
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(184,135,78,0.15);}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:820px;margin:0 auto;}
+.logo{font-size:1.5rem;font-weight:600;color:var(--gold);font-family:'Cormorant Garamond',serif;text-decoration:none;}
+.btn-devis{background:var(--gold);color:#fff;padding:0.6rem 1.4rem;border-radius:2px;font-size:0.8rem;letter-spacing:0.05em;
+  text-decoration:none;transition:background .2s ease;}
+.btn-devis:hover{background:var(--gold-dark);}
+
+main.legal{max-width:720px;margin:0 auto;padding:3.5rem 1.5rem 5rem;}
+.legal h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:400;margin-bottom:1.5rem;}
+.legal h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin:2rem 0 0.6rem;color:var(--gold-text);}
+.legal p{color:var(--ink);margin-bottom:0.9rem;}
+.legal ul{margin:0 0 0.9rem 1.2rem;color:var(--ink);}
+.legal li{margin-bottom:0.3rem;}
+.legal-todo{background:#FFF6E6;border:1px solid rgba(184,135,78,0.35);border-radius:4px;padding:0.9rem 1rem;font-size:0.85rem;color:var(--gold-text);}
+
+footer{padding:2.5rem 1.5rem;text-align:center;font-size:0.72rem;color:rgba(43,38,32,0.6);}
+.footer-legal{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:0.8rem;font-size:0.7rem;letter-spacing:0.05em;}
+.footer-legal a{color:rgba(43,38,32,0.6);text-decoration:none;}
+.footer-legal a:hover{color:var(--gold-text);}
