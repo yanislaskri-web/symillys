@@ -5,7 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Symilly's — Agence Événementielle Paris & IDF</title>
 <meta name="description" content="Symilly's, agence événementielle à Paris et en Île-de-France. Événementiel, traiteur et chef à domicile sur mesure.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230D0D0D'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='60' font-style='italic' fill='%23C9A96E' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Symilly's — Agence Événementielle Paris & IDF">
+<meta property="og:description" content="Symilly's, agence événementielle à Paris et en Île-de-France. Événementiel, traiteur et chef à domicile sur mesure.">
+<!-- TODO : ajouter og:image et og:url une fois le site en ligne (dimensions recommandées 1200x630) -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Symilly's — Agence Événementielle Paris & IDF">
+<meta name="twitter:description" content="Symilly's, agence événementielle à Paris et en Île-de-France. Événementiel, traiteur et chef à domicile sur mesure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EventPlanner",
+  "name": "Symilly's",
+  "description": "Agence événementielle à Paris et en Île-de-France : événementiel, traiteur et chef à domicile sur mesure.",
+  "areaServed": ["Paris", "Île-de-France"],
+  "telephone": "+33771126725",
+  "email": "symillys.co.pro@gmail.com",
+  "sameAs": ["https://instagram.com/symillys"]
+}
+</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,6 +47,45 @@
 }
 
 html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 500;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 0.8rem 1.4rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
 
 body {
   font-family: 'Jost', sans-serif;
@@ -326,7 +389,7 @@ nav {
   font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(13,13,13,0.65);
+  color: rgba(13,13,13,0.75);
   margin-bottom: 0.3rem;
 }
 
@@ -340,7 +403,7 @@ nav {
 
 .num-desc {
   font-size: 0.75rem;
-  color: rgba(13,13,13,0.6);
+  color: rgba(13,13,13,0.75);
   margin-top: 0.3rem;
 }
 
@@ -596,13 +659,13 @@ nav {
   font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(13,13,13,0.6);
+  color: rgba(13,13,13,0.75);
   margin-top: 0.3rem;
 }
 
 .estat-desc {
   font-size: 0.78rem;
-  color: rgba(13,13,13,0.55);
+  color: rgba(13,13,13,0.72);
   margin-top: 0.4rem;
   line-height: 1.5;
 }
@@ -650,7 +713,7 @@ nav {
 
 .temo-event {
   font-size: 0.7rem;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
   margin-top: 0.2rem;
 }
 
@@ -694,7 +757,7 @@ nav {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
   margin-bottom: 0.2rem;
 }
 
@@ -742,6 +805,14 @@ nav {
   color: var(--white);
   margin-bottom: 0.4rem;
   line-height: 1.2;
+}
+.tf-question:focus { outline: none; }
+
+.tf-error {
+  color: #FF8A80;
+  font-size: 0.8rem;
+  margin-top: -0.8rem;
+  margin-bottom: 1rem;
 }
 
 .tf-hint {
@@ -956,7 +1027,7 @@ footer {
 
 .footer-copy {
   font-size: 0.7rem;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5);
   letter-spacing: 0.08em;
 }
 
@@ -968,7 +1039,7 @@ footer {
   font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -1136,8 +1207,10 @@ footer {
 </head>
 <body>
 
+<a href="#main" class="skip-link">Aller au contenu</a>
+
 <!-- NAV -->
-<nav>
+<nav aria-label="Navigation principale">
   <a href="#" class="nav-logo">Symilly's</a>
   <div class="nav-right">
     <ul class="nav-links">
@@ -1147,14 +1220,14 @@ footer {
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-btn">Devis gratuit</a>
-    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Menu">
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu mobile" hidden>
   <a href="#services">Nos services</a>
   <hr>
   <a href="#methode">Notre méthode</a>
@@ -1162,18 +1235,28 @@ footer {
   <a href="#galerie">Galerie</a>
   <hr>
   <a href="#contact">Contact & Devis</a>
-  <a href="https://instagram.com/symillys" target="_blank" class="mobile-instagram">@symillys</a>
+  <a href="https://instagram.com/symillys" target="_blank" rel="noopener" class="mobile-instagram">@symillys</a>
 </div>
 
 <script>
 function toggleMenu() {
-  document.getElementById('burgerBtn').classList.toggle('open');
-  document.getElementById('mobileMenu').classList.toggle('open');
-  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  const isOpen = burger.classList.toggle('open');
+  menu.classList.toggle('open', isOpen);
+  menu.hidden = !isOpen;
+  burger.setAttribute('aria-expanded', String(isOpen));
+  burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 function closeMenu() {
-  document.getElementById('burgerBtn').classList.remove('open');
-  document.getElementById('mobileMenu').classList.remove('open');
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  burger.classList.remove('open');
+  menu.classList.remove('open');
+  menu.hidden = true;
+  burger.setAttribute('aria-expanded', 'false');
+  burger.setAttribute('aria-label', 'Ouvrir le menu');
   document.body.style.overflow = '';
 }
 document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
@@ -1189,7 +1272,7 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
 </script>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="main">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -1439,7 +1522,7 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
     </div>
     <!-- TYPEFORM STYLE -->
     <div class="tf-wrap">
-      <div class="tf-progress"><div class="tf-progress-fill" id="tfProgress" style="width:16%"></div></div>
+      <div class="tf-progress" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="Progression du formulaire"><div class="tf-progress-fill" id="tfProgress" style="width:16%"></div></div>
 
       <!-- STEP 1 -->
       <div class="tf-step active" id="step1">
@@ -1464,7 +1547,8 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
         <div class="tf-step-num"><span>2</span> Sur 6</div>
         <div class="tf-question">Quand aura lieu votre événement ? 📅</div>
         <div class="tf-hint">Une date approximative suffit</div>
-        <input type="text" class="tf-input" id="tfDate" placeholder="Ex : 15 septembre 2025, été 2026…">
+        <label for="tfDate" class="sr-only">Date de l'événement</label>
+        <input type="text" class="tf-input" id="tfDate" placeholder="Ex : 15 septembre 2026, été 2027…">
         <div class="tf-question" style="font-size:1.2rem;margin-top:0.5rem;">Combien d'invités ? 👥</div>
         <div class="tf-hint">Approximativement</div>
         <div class="tf-cards" style="grid-template-columns:1fr 1fr 1fr;">
@@ -1514,6 +1598,7 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
         <div class="tf-step-num"><span>5</span> Sur 6</div>
         <div class="tf-question">Décrivez-nous votre projet ✍️</div>
         <div class="tf-hint">Ambiance souhaitée, contraintes particulières, demandes spéciales…</div>
+        <label for="tfMessage" class="sr-only">Description du projet</label>
         <textarea class="tf-input" id="tfMessage" rows="4" placeholder="Ex : Mariage champêtre pour 80 personnes, ambiance bohème, menu végétarien souhaité…"></textarea>
         <div class="tf-nav"><button class="tf-back" onclick="goTo(4)">← Retour</button><button class="tf-next" onclick="goTo(6)">Suivant →</button></div>
       </div>
@@ -1524,11 +1609,20 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
         <div class="tf-question">Comment vous joindre ? 📞</div>
         <div class="tf-hint">Nous vous répondons sous 48h</div>
         <div class="tf-input-row">
-          <input type="text" class="tf-input" id="tfPrenom" placeholder="Votre prénom">
-          <input type="text" class="tf-input" id="tfNom" placeholder="Votre nom">
+          <div>
+            <label for="tfPrenom" class="sr-only">Prénom</label>
+            <input type="text" class="tf-input" id="tfPrenom" placeholder="Votre prénom" required autocomplete="given-name">
+          </div>
+          <div>
+            <label for="tfNom" class="sr-only">Nom</label>
+            <input type="text" class="tf-input" id="tfNom" placeholder="Votre nom" autocomplete="family-name">
+          </div>
         </div>
-        <input type="email" class="tf-input" id="tfEmail" placeholder="Votre email">
-        <input type="tel" class="tf-input" id="tfTel" placeholder="Votre téléphone">
+        <label for="tfEmail" class="sr-only">Email</label>
+        <input type="email" class="tf-input" id="tfEmail" placeholder="Votre email" required autocomplete="email">
+        <label for="tfTel" class="sr-only">Téléphone</label>
+        <input type="tel" class="tf-input" id="tfTel" placeholder="Votre téléphone" autocomplete="tel">
+        <p id="tfError" class="tf-error" role="alert" hidden></p>
         <div class="tf-nav"><button class="tf-back" onclick="goTo(5)">← Retour</button><button class="tf-next" onclick="submitForm()">Envoyer ma demande 🎉</button></div>
       </div>
 
@@ -1544,25 +1638,57 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
     let currentStep = 1;
     const totalSteps = 6;
 
+    // Rend les cartes de sélection accessibles au clavier (role, tabindex, Entrée/Espace)
+    document.querySelectorAll('.tf-card').forEach(card => {
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-pressed', 'false');
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
     function goTo(n) {
       document.querySelectorAll('.tf-step').forEach(s => s.classList.remove('active'));
       const el = document.getElementById('step' + n);
-      if (el) { el.classList.add('active'); currentStep = n; }
+      if (el) {
+        el.classList.add('active');
+        currentStep = n;
+        const heading = el.querySelector('.tf-question');
+        if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+      }
       document.getElementById('tfProgress').style.width = (n / totalSteps * 100) + '%';
+      document.getElementById('tfProgress').parentElement.setAttribute('aria-valuenow', String(n));
       document.querySelector('.tf-wrap').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
-    function toggleCard(card) { card.classList.toggle('selected'); }
+    function toggleCard(card) {
+      const selected = card.classList.toggle('selected');
+      card.setAttribute('aria-pressed', String(selected));
+    }
 
     function selectCard(card, group) {
-      card.closest('.tf-cards').querySelectorAll('.tf-card').forEach(c => c.classList.remove('selected'));
+      card.closest('.tf-cards').querySelectorAll('.tf-card').forEach(c => {
+        c.classList.remove('selected');
+        c.setAttribute('aria-pressed', 'false');
+      });
       card.classList.add('selected');
+      card.setAttribute('aria-pressed', 'true');
     }
 
     function submitForm() {
       const prenom = document.getElementById('tfPrenom').value.trim();
       const email = document.getElementById('tfEmail').value.trim();
-      if (!prenom || !email) { alert('Merci de renseigner votre prénom et email.'); return; }
+      const errorEl = document.getElementById('tfError');
+      if (!prenom || !email) {
+        errorEl.textContent = 'Merci de renseigner votre prénom et votre email.';
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
 
       const prestations = [...document.querySelectorAll('#step1 .tf-card.selected')]
         .map(c => c.querySelector('.tf-card-label').textContent).join(', ');
@@ -1600,7 +1726,7 @@ document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
 </footer>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/33771126725" target="_blank" class="whatsapp-btn" title="Nous contacter sur WhatsApp">
+<a href="https://wa.me/33771126725" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Nous contacter sur WhatsApp" title="Nous contacter sur WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
