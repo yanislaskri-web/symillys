@@ -113,9 +113,10 @@
     text-transform:uppercase;border-radius:2px;transition:transform .2s ease, background .2s ease;}
   .btn-gold:hover{transform:scale(1.04);background:var(--gold-dark);}
   .hero-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:0.7rem;margin-top:3.5rem;max-width:1080px;margin-left:auto;margin-right:auto;}
-  .ph{aspect-ratio:1;border-radius:3px;background:linear-gradient(135deg,#EFE3D2,#D9C4A3);display:flex;align-items:center;justify-content:center;
+  .ph{aspect-ratio:1;border-radius:3px;background:linear-gradient(135deg,#EFE3D2,#D9C4A3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.7rem;
     color:rgba(43,38,32,0.5);font-size:0.7rem;text-align:center;padding:0.5rem;transition:transform .3s cubic-bezier(.22,1,.36,1);}
   .ph:hover{transform:scale(1.04);}
+  .ph svg{width:32px;height:32px;color:rgba(43,38,32,0.32);flex-shrink:0;}
   @media(max-width:700px){ .hero-gallery{grid-template-columns:repeat(2,1fr);} }
 
   .pres{padding:5rem 1.5rem;background:var(--bg2);border-top:1px solid rgba(184,135,78,0.15);}
@@ -269,10 +270,22 @@
   <p class="reveal d2">Événementiel, traiteur et chef à domicile : Symilly's conçoit et orchestre chaque détail pour des moments qui marquent.</p>
   <a href="#contact" class="btn-gold reveal d3">Demander un devis</a>
   <div class="hero-gallery">
-    <div class="ph reveal">Photo événement 1<br>(à remplacer)</div>
-    <div class="ph reveal d1">Photo événement 2<br>(à remplacer)</div>
-    <div class="ph reveal d2">Photo événement 3<br>(à remplacer)</div>
-    <div class="ph reveal d3">Photo événement 4<br>(à remplacer)</div>
+    <div class="ph reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12v9M8 21h8M12 12 5 5h14l-7 7ZM5 5a7 7 0 0 0 14 0"/></svg>
+      Photo événement 1<br>(à remplacer)
+    </div>
+    <div class="ph reveal d1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Photo événement 2<br>(à remplacer)
+    </div>
+    <div class="ph reveal d2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-1.8 0-3 1.5-3 3.2 0 1-.5 1.6-1.2 2.3A4.2 4.2 0 0 0 6.5 14c0 1.6.9 2.6 2 3.3V21h7v-3.7c1.1-.7 2-1.7 2-3.3a4.2 4.2 0 0 0-1.3-5.5C15.5 7.8 15 7.2 15 6.2 15 4.5 13.8 3 12 3Z"/><path d="M9 21h6"/></svg>
+      Photo événement 3<br>(à remplacer)
+    </div>
+    <div class="ph reveal d3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M8 6c0 3 2 4 4 5M16 6c0 3-2 4-4 5M7 11c0 3 2 4.5 5 5.5M17 11c0 3-2 4.5-5 5.5M6 16c0 2.5 2 4 6 5M18 16c0 2.5-2 4-6 5"/></svg>
+      Photo événement 4<br>(à remplacer)
+    </div>
   </div>
 </section>
 
@@ -346,10 +359,22 @@
     <p class="reveal d1">Un aperçu des événements que nous avons eu le plaisir d'orchestrer.</p>
   </div>
   <div class="portfolio-grid">
-    <div class="ph reveal">Réception de mariage</div>
-    <div class="ph reveal d1">Dîner privé</div>
-    <div class="ph reveal d2">Cocktail dînatoire</div>
-    <div class="ph reveal d3">Soirée corporate</div>
+    <div class="ph reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg>
+      Réception de mariage
+    </div>
+    <div class="ph reveal d1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Dîner privé
+    </div>
+    <div class="ph reveal d2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12v9M8 21h8M12 12 5 5h14l-7 7ZM5 5a7 7 0 0 0 14 0"/></svg>
+      Cocktail dînatoire
+    </div>
+    <div class="ph reveal d3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
+      Soirée corporate
+    </div>
   </div>
 </section>
 
