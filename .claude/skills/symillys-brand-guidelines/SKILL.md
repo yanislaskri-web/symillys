@@ -22,10 +22,12 @@ Référence directe : le site actuel (index.html) — toute production doit rest
 | Fond secondaire (sections alternées) | `--bg2` | `#FAF7F2` |
 | Fond carte | `--card` | `#FFFFFF` |
 | Texte atténué | `--muted` | `rgba(43,38,32,0.65)` |
+| Bleu marine (secondaire, usage restreint) | `--navy` | `#1B2A41` |
 
 Règles d'usage :
 - L'or (`--gold`) est réservé aux accents et CTA — jamais en fond de grande surface (dilue le côté premium).
-- Ne jamais utiliser de bleu, violet, ou dégradés multicolores : la marque reste monochrome dorée sur fond clair.
+- Le bleu marine (`--navy`) est une couleur **secondaire tolérée**, jamais dominante : uniquement pour de grandes surfaces "fond sombre" ponctuelles (ex. panneau "Entreprises", footer) où le texte reste blanc/or dessus. L'or garde le rôle principal partout ailleurs (CTA, titres, liens).
+- En dehors de `--navy` sur ces surfaces précises : jamais de violet ni de dégradés multicolores.
 - Les bordures utilisent l'or à faible opacité (`rgba(184,135,78,0.15)` à `0.25)`), jamais du gris neutre.
 
 ## Typographie

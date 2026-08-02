@@ -34,6 +34,7 @@
 <style>
   :root{
     --gold:#B8874E; --gold-dark:#9E7239; --gold-text:#8A6134; --ink:#2B2620; --bg:#FFFFFF; --bg2:#FAF7F2; --card:#FFFFFF; --muted:rgba(43,38,32,0.65);
+    --navy:#1B2A41; --navy-light:#2C4870; --navy-text:#3D5A80;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -170,7 +171,7 @@
   .clienteles{padding:5rem 1.5rem;}
   .clienteles-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:1080px;margin:0 auto;background:rgba(184,135,78,0.15);}
   .clientele-panel{padding:3rem 2.4rem;}
-  .clientele-panel.dark{background:var(--ink);color:#fff;}
+  .clientele-panel.dark{background:var(--navy);color:#fff;}
   .clientele-panel.light{background:var(--card);}
   .clientele-panel h3{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;font-weight:400;margin-bottom:1.8rem;text-align:center;}
   .clientele-panel.light h3{color:var(--gold-text);}
@@ -242,12 +243,12 @@
   .form-consent input[type=checkbox]{width:auto;flex-shrink:0;margin-top:0.2rem;accent-color:var(--gold);}
   .form-consent a{color:var(--gold-text);text-decoration:underline;}
   .footer-legal{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:0.8rem;font-size:0.7rem;letter-spacing:0.05em;}
-  .footer-legal a{color:rgba(43,38,32,0.6);}
-  .footer-legal a:hover{color:var(--gold-text);}
+  .footer-legal a{color:rgba(255,255,255,0.6);}
+  .footer-legal a:hover{color:var(--gold);}
   @media(max-width:700px){ .contact-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;} }
 
-  footer{padding:2.5rem 1.5rem;text-align:center;font-size:0.72rem;color:rgba(43,38,32,0.6);}
-  footer a{color:var(--gold-text);}
+  footer{padding:2.5rem 1.5rem;text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.6);background:var(--navy);}
+  footer a{color:var(--gold);}
 
   .whatsapp-btn{
     position:fixed; bottom:1.8rem; right:1.8rem; z-index:300;
