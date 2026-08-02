@@ -40,8 +40,8 @@ Règles d'usage :
 ## Composition et style
 
 - Sections avec beaucoup d'air : padding généreux (`5rem 1.5rem` sur desktop), pas de densité.
-- Cartes (`.service-card`, `.testi-card`) : fond blanc, bordure or fine, ombre douce uniquement au hover.
-- Boutons : coins presque droits (`border-radius: 2px`), jamais arrondis façon app mobile.
+- Cartes (`.service-card`, `.testi-card`) : fond blanc, bordure or fine, coins doux (`border-radius: 16px`), ombre douce uniquement au hover.
+- Boutons et CTA : forme pilule (`border-radius: 9999px`) — toute l'interface est arrondie, aucun coin carré (cartes 16px, champs de formulaire 10px, boutons en pilule).
 - Animations : subtiles, `reveal` au scroll (translateY + opacity), transitions `cubic-bezier(.22,1,.36,1)` — jamais de rebond agressif ou d'effet gadget.
 - Photos/visuels : toujours en écho au ton chaleureux et discret, jamais de stock photo générique "corporate".
 
